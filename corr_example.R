@@ -96,7 +96,7 @@ p <- out %>%
        title = "r = {round(out$r[as.integer(current_frame)], 2)},
                 actual = {round(out$actual[as.integer(current_frame)], 2)}")
 
-## To save to a single file
+## Save to a single file
 animate(p, fps = 25, duration = 30,
         width = 400, height = 400,
         renderer = gifski_renderer(file = "figures/cor.gif"))
@@ -111,6 +111,7 @@ animate(p, fps = 25, duration = 30,
 ## I'll repeat some code from above here, so that it's self-contained.
 
 ## A function to make one matrix of data
+## and quietly convert it to a tibble
 gen_dat <- function(r) {
   u <- matrix(rnorm(2000,0,1), 1000, 2)
   x <- u %*% chol(matrix(c(1, r, r, 1), 2, 2))
@@ -118,7 +119,7 @@ gen_dat <- function(r) {
     rename(x = ...1, y = ...2)
 }
 
-## A function that returns a plot as an object
+## A function that returns a specific plot as an object
 gen_plot <- function(.x, slp = r) {
   corval <- round(cor(.x$x, .x$y), 2)
   p <- ggplot(data = .x,
