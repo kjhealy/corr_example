@@ -68,8 +68,7 @@ gen_dat <- function(r) {
     rename(x = ...1, y = ...2)
 }
 
-## Start with a tibble (a data frame) of correlation values and a
-## numerical index of the rows
+## Start with a one-column tibble (a data frame) of correlation values
 dat <- tibble(r = seq(-.99, .99, by=.01))
 
 ## Generate the data
